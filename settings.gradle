@@ -1,0 +1,5 @@
+rootProject.name = 'marketapp'
+include 'application'
+include 'products'
+include 'product'
+
