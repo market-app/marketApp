@@ -1,10 +1,7 @@
 package br.com.marketapp.domain;
 
 import br.com.marketapp.enumerates.ProductType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,8 +17,10 @@ public class Product {
     private Long id;
     private String name;
     private String price;
-    private LocalDate expirationDate;
     private ProductType type;
     private Long calories;
     private String brand;
+    private Long weight;
+    private Long quantity;
+    private String description;
 }
