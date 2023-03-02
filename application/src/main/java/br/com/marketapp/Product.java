@@ -1,4 +1,4 @@
-package br.com.domain;
+package br.com.marketapp;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
