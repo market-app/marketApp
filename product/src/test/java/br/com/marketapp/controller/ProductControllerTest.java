@@ -17,6 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
 
+import static br.com.marketapp.product.util.ConverterJsonToString.asJsonString;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
@@ -45,8 +46,8 @@ class ProductControllerTest {
     void saveProduct() throws Exception {
 
         ProductDto productDto = new ProductDto();
-        productDto.setName("Test 1");
-        productDto.setPrice("2020");
+        productDto.setName("Carne");
+        productDto.setPrice("79");
 
         when(productService
                 .saveProduct(productDto.toEntity()))
@@ -64,11 +65,4 @@ class ProductControllerTest {
     void findProductById() {
     }
 
-    public static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

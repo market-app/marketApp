@@ -3,6 +3,18 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<groupId>br.com.marketapp</groupId>
+
+	<artifactId>marketapp</artifactId>
+
+	<version>0.0.1-SNAPSHOT</version>
+
+	<packaging>pom</packaging>
+
+	<name>marketapp</name>
+	
+	<description>Market App</description>
+
 	<modules>
 		<module>application</module>
 		<module>product</module>
@@ -14,13 +26,6 @@
 		<version>2.7.0</version>
 		<relativePath/>
 	</parent>
-
-	<groupId>br.com.marketapp</groupId>
-	<artifactId>marketapp</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
-	<name>marketapp</name>
-	<description>Market App</description>
 
 	<properties>
 		<java.version>11</java.version>

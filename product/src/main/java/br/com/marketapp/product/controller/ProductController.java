@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @RestController
@@ -37,5 +40,29 @@ public class ProductController {
         Product productById = productService.findProductById(id);
         return ResponseEntity.ok(productById.toDto());
     }
+
+    @GetMapping("/all")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<ProductDto>> SearchAllProducts() {
+
+        List<Product> productList = productService.searchAllProducts();
+
+        List<ProductDto> productDtoList = productList.stream().map(Product::toDto).collect(Collectors.toList());
+
+        return ResponseEntity.ok(productDtoList);
+    }
+
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) throws Exception {
+        Product productById = productService.findProductById(id);
+
+        if (productById != null) {
+            productService.deleteProduct(id);
+        }
+
+
+    }
+
 
 }

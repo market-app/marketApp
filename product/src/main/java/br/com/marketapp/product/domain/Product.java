@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.List;
 
 @Entity
 @Data
@@ -30,7 +32,7 @@ public class Product implements Serializable {
     @Column(nullable = false)
     private String price;
 
-    public ProductDto toDto(){
+    public ProductDto toDto() {
         return ProductMapper.INSTANCE.toDto(this);
     }
 }
