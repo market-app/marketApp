@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -24,5 +26,15 @@ public class ProductServiceImpl implements ProductService {
         return productRepository
                 .findById(id)
                 .orElseThrow(() -> new Exception("Produto ñ existe"));
+    }
+
+    @Override
+    public List<Product> searchAllProducts() {
+        return productRepository.findAll();
+    }
+
+    @Override
+    public void deleteProduct(Long id) {
+        productRepository.deleteById(id);
     }
 }
