@@ -1,8 +1,8 @@
 package br.com.marketapp;
 
-import br.com.marketapp.controller.ProductController;
-import br.com.marketapp.dto.ProductDto;
-import br.com.marketapp.service.ProductService;
+import br.com.marketapp.product.controller.ProductController;
+import br.com.marketapp.product.dto.ProductDto;
+import br.com.marketapp.product.service.ProductService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

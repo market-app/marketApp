@@ -1,11 +1,14 @@
-package br.com.marketapp.domain;
+package br.com.marketapp.product.domain;
 
-import lombok.*;
+import br.com.marketapp.product.dto.ProductDto;
+import br.com.marketapp.product.mapper.ProductMapper;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serial;
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 @Entity
 @Data
@@ -15,15 +18,19 @@ import java.math.BigDecimal;
 @Table(name = "product")
 public class Product implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false, unique = true)
     private String name;
+
     @Column(nullable = false)
     private String price;
 
+    public ProductDto toDto(){
+        return ProductMapper.INSTANCE.toDto(this);
+    }
 }

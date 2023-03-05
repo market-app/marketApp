@@ -1,6 +1,6 @@
-package br.com.marketapp.repository;
+package br.com.marketapp.product.repository;
 
-import br.com.marketapp.domain.Product;
+import br.com.marketapp.product.domain.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
