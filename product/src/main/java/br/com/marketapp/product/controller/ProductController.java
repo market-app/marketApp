@@ -34,6 +34,19 @@ public class ProductController {
                 .build();
     }
 
+    @PutMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Void> updateProductById (@PathVariable("id") Long id, @RequestBody @Valid ProductDto productDto) throws Exception {
+        Product productById = productService.findProductById(id);
+
+        if (productById != null) {
+            productService.updateProduct(productDto.toEntity(), id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ProductDto> findProductById(@PathVariable Long id) throws Exception {
@@ -55,14 +68,14 @@ public class ProductController {
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) throws Exception {
+
         Product productById = productService.findProductById(id);
 
         if (productById != null) {
             productService.deleteProduct(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-
     }
-
-
 }
