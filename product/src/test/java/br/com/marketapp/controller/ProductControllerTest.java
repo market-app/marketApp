@@ -3,6 +3,7 @@ package br.com.marketapp.controller;
 import br.com.marketapp.product.controller.ProductController;
 import br.com.marketapp.product.domain.Product;
 import br.com.marketapp.product.dto.ProductDto;
+import br.com.marketapp.product.mapper.ProductMapper;
 import br.com.marketapp.product.service.ProductService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;

@@ -16,6 +16,8 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class ProductDto {
 
+    private Long id;
+
     @NotBlank
     private String name;
 
