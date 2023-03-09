@@ -12,6 +12,7 @@ class ProductMapperTest {
 
     @Test
     void toDto() {
+
         Product product =  new Product();
         product.setId(1L);
 
@@ -21,13 +22,30 @@ class ProductMapperTest {
     }
 
     @Test
+    void toDtoWithNull() {
+        ProductDto productDto = ProductMapper.INSTANCE.toDto(null);
+
+        Assertions.assertNull(productDto);
+    }
+
+    @Test
     void toEntity() {
+
         ProductDto productDto = new ProductDto();
         productDto.setId(1L);
 
         Product product = ProductMapper.INSTANCE.toEntity(productDto);
 
         Assertions.assertEquals(1L, product.getId());
+
+    }
+
+    @Test
+    void toEntityWithNull() {
+
+        Product product = ProductMapper.INSTANCE.toEntity(null);
+
+        Assertions.assertNull(product);
 
     }
 }
