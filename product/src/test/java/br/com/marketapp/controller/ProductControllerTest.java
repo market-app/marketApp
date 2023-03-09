@@ -43,7 +43,7 @@ class ProductControllerTest {
 
         ProductDto productDto = new ProductDto();
         productDto.setName("Carne");
-        productDto.setPrice("79");
+        productDto.setPrice("80");
 
         when(productService
                 .saveProduct(productDto.toEntity()))
