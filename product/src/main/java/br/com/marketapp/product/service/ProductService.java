@@ -8,9 +8,9 @@ public interface ProductService {
 
     Product saveProduct(Product product);
 
-    Product findProductById(Long id) throws Exception;
+    Product findProductById(Long id);
 
-    List<Product> searchAllProducts();
+    List<Product> findAllProducts();
 
     void deleteProduct(Long id);
 

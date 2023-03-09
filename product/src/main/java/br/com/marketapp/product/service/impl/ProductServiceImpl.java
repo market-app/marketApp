@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -24,32 +23,31 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product findProductById(Long id) throws Exception {
+    public Product findProductById(Long id) {
         return productRepository
                 .findById(id)
-                .orElseThrow(() -> new Exception("Produto ñ existe"));
+                .orElseThrow(() -> new ProductNotFoundException("Produto não existe"));
     }
 
     @Override
-    public List<Product> searchAllProducts() {
+    public List<Product> findAllProducts() {
         return productRepository.findAll();
     }
 
     @Override
     public void deleteProduct(Long id) {
-        productRepository.deleteById(id);
+        Long productById = findProductById(id).getId();
+        productRepository.deleteById(productById);
     }
 
     @Override
     @Transactional
     public Product updateProduct(Product product, Long id) {
-        Optional<Product> byId = productRepository.findById(id);
+        Product productById = findProductById(id);
 
-        if (byId.isPresent()) {
-            byId.get().setName(product.getName());
-            byId.get().setPrice(product.getPrice());
-            return productRepository.save(byId.get());
-        }
-        throw new ProductNotFoundException("Produto nao existe");
+        productById.setName(product.getName());
+        productById.setPrice(product.getPrice());
+
+        return productRepository.save(productById);
     }
 }

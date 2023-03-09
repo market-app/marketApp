@@ -3,6 +3,7 @@ package br.com.marketapp.repository;
 import br.com.marketapp.product.domain.Product;
 import br.com.marketapp.product.repository.ProductRepository;
 import org.assertj.core.api.Assertions;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
@@ -12,32 +13,32 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import java.util.List;
 import java.util.Optional;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+
 @DataJpaTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-public class ProductRepositoryTest {
+class ProductRepositoryTest {
 
     @Autowired
     private ProductRepository productRepository;
 
     @Test
-    public void ProductRepository_Save_ReturnsSavedProduct() {
+    void ProductRepository_Save_ReturnsSavedProduct() {
 
-        //Arrange
         Product product = Product.builder()
                 .name("macarrao")
                 .price("30")
                 .build();
 
-        //Act
         Product savedProduct = productRepository.save(product);
 
-        //Assert
         Assertions.assertThat(savedProduct).isNotNull();
-        Assertions.assertThat(savedProduct.getId()).isGreaterThan(0);
+        Assertions.assertThat(savedProduct.getId()).isPositive();
     }
 
     @Test
-    public void ProductRepository_FindAll_ReturnsMoreThanOneProduct() {
+    void ProductRepository_FindAll_ReturnsMoreThanOneProduct() {
         Product productOne = Product.builder()
                 .name("macarrao")
                 .price("30")
@@ -53,14 +54,12 @@ public class ProductRepositoryTest {
 
         List<Product> productList = productRepository.findAll();
 
-        Assertions.assertThat(productList).isNotNull();
-        Assertions.assertThat(productList.size()).isEqualTo(2);
-
-
+        assertThat(productList, is(notNullValue()));
+        assertThat(productList, Matchers.hasSize(2));
     }
 
     @Test
-    public void ProductRepository_FindByID_ReturnsMoreThanOneProduct() {
+    void ProductRepository_FindByID_ReturnsMoreThanOneProduct() {
         Product productOne = Product.builder()
                 .name("macarrao")
                 .price("30")
@@ -71,12 +70,10 @@ public class ProductRepositoryTest {
         Product byId = productRepository.findById(productOne.getId()).get();
 
         Assertions.assertThat(byId).isNotNull();
-
-
     }
 
     @Test
-    public void ProductRepository_UpdateProduct_ReturnsAnotherProduct() {
+    void ProductRepository_UpdateProduct_ReturnsAnotherProduct() {
         Product productOne = Product.builder()
                 .name("macarrao")
                 .price("30")
@@ -96,7 +93,7 @@ public class ProductRepositoryTest {
     }
 
     @Test
-    public void ProductRepository_DeleteProduct_ReturnsProductIsEmpty() {
+    void ProductRepository_DeleteProduct_ReturnsProductIsEmpty() {
         Product productOne = Product.builder()
                 .name("macarrao")
                 .price("30")
@@ -106,9 +103,9 @@ public class ProductRepositoryTest {
 
         productRepository.deleteById(productOne.getId());
 
-        Optional<Product> byId = productRepository.findById(productOne.getId());
+        Optional<Product> productOptional = productRepository.findById(productOne.getId());
 
-        Assertions.assertThat(byId).isEmpty();
+        assertThat(productOptional.isEmpty(), equalTo(true));
     }
 
 }

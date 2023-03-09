@@ -66,4 +66,16 @@ class ProductControllerTest {
     void findProductById() {
     }
 
+    @Test
+    void updateProductById() {
+    }
+
+    @Test
+    void findAllProducts() {
+    }
+
+    @Test
+    void deleteProduct() {
+    }
+
 }

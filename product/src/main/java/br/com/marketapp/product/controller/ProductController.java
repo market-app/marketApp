@@ -24,27 +24,22 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Void> saveProduct(@RequestBody @Valid ProductDto productDto) {
+    public ResponseEntity<Product> saveProduct(@RequestBody @Valid ProductDto productDto) {
         Product product = productService.saveProduct(productDto.toEntity());
         return ResponseEntity
                 .created(linkTo(ProductController.class)
                         .slash(product.getId())
                         .withSelfRel()
                         .toUri())
-                .build();
+                .body(product);
     }
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Void> updateProductById (@PathVariable("id") Long id, @RequestBody @Valid ProductDto productDto) throws Exception {
-        Product productById = productService.findProductById(id);
-
-        if (productById != null) {
-            productService.updateProduct(productDto.toEntity(), id);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<Void> updateProductById(@PathVariable("id") Long id,
+                                                  @RequestBody @Valid ProductDto productDto) {
+        productService.updateProduct(productDto.toEntity(), id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("{id}")
@@ -54,28 +49,23 @@ public class ProductController {
         return ResponseEntity.ok(productById.toDto());
     }
 
-    @GetMapping("/all")
+    @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<ProductDto>> SearchAllProducts() {
+    public ResponseEntity<List<ProductDto>> findAllProducts() {
 
-        List<Product> productList = productService.searchAllProducts();
-
-        List<ProductDto> productDtoList = productList.stream().map(Product::toDto).collect(Collectors.toList());
+        List<ProductDto> productDtoList = productService
+                .findAllProducts()
+                .stream()
+                .map(Product::toDto)
+                .collect(Collectors.toList());
 
         return ResponseEntity.ok(productDtoList);
     }
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) throws Exception {
-
-        Product productById = productService.findProductById(id);
-
-        if (productById != null) {
-            productService.deleteProduct(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+        productService.deleteProduct(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
