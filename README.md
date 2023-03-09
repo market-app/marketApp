@@ -1,4 +1,6 @@
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=market-app_marketApp&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=market-app_marketApp)
+
 # Market App
 
 Market App is a useful tool that can simplify meal planning by providing a comprehensive grocery list based on the user's input of meals. The app will have an easy-to-use interface that enables users to add and remove items from their list. The grocery list will be customized to include all the necessary ingredients for the selected meals, with details on the type and quantity of each ingredient.
