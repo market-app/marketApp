@@ -44,7 +44,7 @@ public class ProductController {
 
     @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<ProductDto> findProductById(@PathVariable Long id) throws Exception {
+    public ResponseEntity<ProductDto> findProductById(@PathVariable Long id) {
         Product productById = productService.findProductById(id);
         return ResponseEntity.ok(productById.toDto());
     }
