@@ -32,6 +32,7 @@
 		<java.version>11</java.version>
 		<sonar.organization>market-app</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.coverage.exclusions>application/**</sonar.coverage.exclusions>
 		<org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
 	</properties>
 
