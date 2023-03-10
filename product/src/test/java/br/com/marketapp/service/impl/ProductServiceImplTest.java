@@ -1,7 +1,7 @@
 package br.com.marketapp.service.impl;
 
+import br.com.marketapp.exceptions.ProductNotFoundException;
 import br.com.marketapp.product.domain.Product;
-import br.com.marketapp.product.exceptions.ProductNotFoundException;
 import br.com.marketapp.product.repository.ProductRepository;
 import br.com.marketapp.product.service.ProductService;
 import org.junit.jupiter.api.BeforeEach;
