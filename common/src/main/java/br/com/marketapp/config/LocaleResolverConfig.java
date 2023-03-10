@@ -32,7 +32,8 @@ public class LocaleResolverConfig extends AcceptHeaderLocaleResolver {
         ResourceBundleMessageSource rs = new ResourceBundleMessageSource();
         rs.addBasenames(
                 "messages-application",
-                "messages-common"
+                "messages-common",
+                "messages-product"
         );
                 rs.setUseCodeAsDefaultMessage(true);
         rs.setDefaultEncoding(StandardCharsets.UTF_8.name());

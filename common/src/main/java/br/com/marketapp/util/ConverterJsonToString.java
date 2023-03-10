@@ -1,4 +1,4 @@
-package br.com.marketapp.product.util;
+package br.com.marketapp.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

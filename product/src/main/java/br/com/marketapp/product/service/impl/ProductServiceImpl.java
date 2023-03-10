@@ -1,9 +1,10 @@
 package br.com.marketapp.product.service.impl;
 
+import br.com.marketapp.exceptions.ProductNotFoundException;
 import br.com.marketapp.product.domain.Product;
-import br.com.marketapp.product.exceptions.ProductNotFoundException;
 import br.com.marketapp.product.repository.ProductRepository;
 import br.com.marketapp.product.service.ProductService;
+import br.com.marketapp.util.Translator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
     public Product findProductById(Long id) {
         return productRepository
                 .findById(id)
-                .orElseThrow(() -> new ProductNotFoundException("Produto não existe"));
+                .orElseThrow(() -> new ProductNotFoundException(Translator.toLocale("product.not.found.exception")));
     }
 
     @Override
