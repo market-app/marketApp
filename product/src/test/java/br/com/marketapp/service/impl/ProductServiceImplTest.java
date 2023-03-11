@@ -1,6 +1,6 @@
 package br.com.marketapp.service.impl;
 
-import br.com.marketapp.exceptions.ProductNotFoundException;
+import br.com.marketapp.exceptions.EntityNotFoundException;
 import br.com.marketapp.product.domain.Product;
 import br.com.marketapp.product.repository.ProductRepository;
 import br.com.marketapp.product.service.ProductService;
@@ -43,7 +43,7 @@ class ProductServiceImplTest {
 
         productService.deleteProduct(1L);
 
-        assertThrows(ProductNotFoundException.class, ()-> productService.findProductById(1L));
+        assertThrows(EntityNotFoundException.class, () -> productService.findProductById(1L));
     }
 
     @Test

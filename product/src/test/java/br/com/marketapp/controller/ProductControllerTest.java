@@ -108,7 +108,6 @@ class ProductControllerTest {
                         delete(PRODUCT_PATH+"/{id}", 1L)
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
-
     }
 
 }

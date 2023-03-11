@@ -1,6 +1,6 @@
 package br.com.marketapp.product.service.impl;
 
-import br.com.marketapp.exceptions.ProductNotFoundException;
+import br.com.marketapp.exceptions.EntityNotFoundException;
 import br.com.marketapp.product.domain.Product;
 import br.com.marketapp.product.repository.ProductRepository;
 import br.com.marketapp.product.service.ProductService;
@@ -27,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
     public Product findProductById(Long id) {
         return productRepository
                 .findById(id)
-                .orElseThrow(() -> new ProductNotFoundException(Translator.toLocale("product.not.found.exception")));
+                .orElseThrow(() -> new EntityNotFoundException(Translator.toLocale("product.not.found.exception")));
     }
 
     @Override

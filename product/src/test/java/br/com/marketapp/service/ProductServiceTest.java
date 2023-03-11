@@ -1,6 +1,6 @@
 package br.com.marketapp.service;
 
-import br.com.marketapp.exceptions.ProductNotFoundException;
+import br.com.marketapp.exceptions.EntityNotFoundException;
 import br.com.marketapp.product.domain.Product;
 import br.com.marketapp.product.repository.ProductRepository;
 import br.com.marketapp.product.service.impl.ProductServiceImpl;
@@ -87,7 +87,7 @@ class ProductServiceTest {
     @Test
     void deleteProductNotFound() {
 
-        assertThatExceptionOfType(ProductNotFoundException.class)
+        assertThatExceptionOfType(EntityNotFoundException.class)
                 .isThrownBy(()-> productService.deleteProduct(1L));
     }
 
@@ -99,7 +99,7 @@ class ProductServiceTest {
                 .price("30")
                 .build();
 
-        assertThatExceptionOfType(ProductNotFoundException.class)
+        assertThatExceptionOfType(EntityNotFoundException.class)
                 .isThrownBy(()->  productService.updateProduct(product,1L));
     }
 }
