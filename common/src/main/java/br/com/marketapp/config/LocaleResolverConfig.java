@@ -14,9 +14,9 @@ import java.util.Locale;
 @Configuration
 public class LocaleResolverConfig extends AcceptHeaderLocaleResolver {
 
-    List<Locale> LOCALES = Arrays.asList(
-            new Locale("en"),
-            new Locale("pt", "BR")
+    List<Locale> locales = Arrays.asList(
+            Locale.US,
+            Locale.of("pt", "BR")
     );
 
     @Override
@@ -24,7 +24,7 @@ public class LocaleResolverConfig extends AcceptHeaderLocaleResolver {
         String headLang = request.getHeader("Accept-Language");
         return headLang == null || headLang.isEmpty()
                 ? Locale.ENGLISH
-                : Locale.lookup(Locale.LanguageRange.parse(headLang), LOCALES);
+                : Locale.lookup(Locale.LanguageRange.parse(headLang), locales);
     }
 
     @Bean
@@ -35,7 +35,7 @@ public class LocaleResolverConfig extends AcceptHeaderLocaleResolver {
                 "messages-common",
                 "messages-product"
         );
-                rs.setUseCodeAsDefaultMessage(true);
+        rs.setUseCodeAsDefaultMessage(true);
         rs.setDefaultEncoding(StandardCharsets.UTF_8.name());
         return rs;
 
