@@ -16,7 +16,7 @@ public class LocaleResolverConfig extends AcceptHeaderLocaleResolver {
 
     List<Locale> locales = Arrays.asList(
             Locale.US,
-            Locale.of("pt", "BR")
+            new Locale("pt", "BR")
     );
 
     @Override
