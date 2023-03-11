@@ -17,6 +17,9 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private Translator translator;
+
     @Override
     @Transactional
     public Product saveProduct(Product product) {
@@ -27,7 +30,7 @@ public class ProductServiceImpl implements ProductService {
     public Product findProductById(Long id) {
         return productRepository
                 .findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(Translator.toLocale("product.not.found.exception")));
+                .orElseThrow(() -> new EntityNotFoundException(translator.toLocale("product.not.found.exception")));
     }
 
     @Override

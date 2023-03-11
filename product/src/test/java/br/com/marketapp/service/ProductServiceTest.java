@@ -4,6 +4,7 @@ import br.com.marketapp.exceptions.EntityNotFoundException;
 import br.com.marketapp.product.domain.Product;
 import br.com.marketapp.product.repository.ProductRepository;
 import br.com.marketapp.product.service.impl.ProductServiceImpl;
+import br.com.marketapp.util.Translator;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,9 +17,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -29,6 +30,9 @@ class ProductServiceTest {
 
     @InjectMocks
     private ProductServiceImpl productService;
+
+    @Mock
+    private Translator translator;
 
     @Test
     void saveProduct() {
@@ -43,7 +47,7 @@ class ProductServiceTest {
 
         Product savedProduct = productService.saveProduct(product);
 
-        assertThat(savedProduct,is(notNullValue()));
+        assertThat(savedProduct, is(notNullValue()));
         assertThat(savedProduct, Matchers.is(equalTo(product)));
     }
 
@@ -61,7 +65,7 @@ class ProductServiceTest {
 
         Product productById = productService.findProductById(1L);
 
-        assertThat(productById,is(notNullValue()));
+        assertThat(productById, is(notNullValue()));
         assertThat(productById, Matchers.is(equalTo(product)));
     }
 
@@ -87,8 +91,8 @@ class ProductServiceTest {
     @Test
     void deleteProductNotFound() {
 
-        assertThatExceptionOfType(EntityNotFoundException.class)
-                .isThrownBy(()-> productService.deleteProduct(1L));
+        assertThrows(EntityNotFoundException.class,
+                () -> productService.deleteProduct(1L));
     }
 
     @Test
@@ -99,7 +103,7 @@ class ProductServiceTest {
                 .price("30")
                 .build();
 
-        assertThatExceptionOfType(EntityNotFoundException.class)
-                .isThrownBy(()->  productService.updateProduct(product,1L));
+        assertThrows(EntityNotFoundException.class,
+                () -> productService.updateProduct(product, 1L));
     }
 }
