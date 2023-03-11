@@ -9,25 +9,24 @@ import java.util.Locale;
 
 @Component
 public class Translator {
-
-    private static ResourceBundleMessageSource messageSource;
+    private ResourceBundleMessageSource messageSource;
 
     @Autowired
     private Translator(ResourceBundleMessageSource messageSource) {
-        Translator.messageSource = messageSource;
+        this.messageSource = messageSource;
     }
 
-    public static String toLocale(String msgCode) {
+    public String toLocale(String msgCode) {
         Locale locale = LocaleContextHolder.getLocale();
         return messageSource.getMessage(msgCode, null, locale);
     }
 
-    public static String toLocale(String msgCode, Object[] args) {
+    public String toLocale(String msgCode, Object[] args) {
         Locale locale = LocaleContextHolder.getLocale();
         return messageSource.getMessage(msgCode, args, locale);
     }
 
-    public static Locale currentLocale() {
+    public Locale currentLocale() {
         return LocaleContextHolder.getLocale();
     }
 }
